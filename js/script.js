@@ -1,4 +1,49 @@
-//Calculo de costo de vivienda
+let menu = prompt("Bienvenido! \nDesea calcular el costo de una casa? Ingrese SI / NO")
+
+while (menu !== "NO") {
+    let metrosCuadrados = parseInt(prompt("Ingrese la cantidad de metros cuadrados. \nEjemplo: 100"))
+
+    let sistemaConstructivo = 0
+
+    let sistemaValido = false
+
+    while (sistemaValido == false) {
+
+        sistemaConstructivo = parseInt(prompt("Ingrese el sistema constructivo que usara en su casa: \n1-MAMPOSTERIA TRADICIONAL \n2-PANELES CLT \n3-PANELES SIP \n4-BLOQUES HCCA"))
+
+        const sistemasConstructivos = [1, 2, 3, 4]
+
+        if (sistemasConstructivos.includes(sistemaConstructivo)) {
+            sistemaValido = true
+        } else {
+            alert("Ha ingresado una opcion incorrecta, prueba nuevamente:\n1-MAMPOSTERIA TRADICIONAL \n2-PANELES CLT \n3-PANELES SIP \n4-BLOQUES HCCA")
+        }
+    }
+
+    let precioSistema = 0
+
+    if ((sistemaConstructivo == 1)) {
+        precioSistema = 950
+    } else if ((sistemaConstructivo == 2)) {
+        precioSistema = 1800
+    } else if ((sistemaConstructivo == 3)) {
+        precioSistema = 1200
+    } else if ((sistemaConstructivo == 4)) {
+        precioSistema = 1400
+    }
+
+    const calcularCosto = (metrosCuadrados, precioSistema, precioTrabajadores) => metrosCuadrados * (precioSistema + precioTrabajadores)
+
+    alert("El precio de su casa sera de USD " + calcularCosto(metrosCuadrados, precioSistema, 460))
+    console.log("El precio de su casa sera de USD " + calcularCosto(metrosCuadrados, precioSistema, 460))
+
+    menu = prompt("Desea hacer otra estimacion? Ingrese SI / NO")
+
+}alert("Cerrando calculadora!")
+
+
+
+/* //Calculo de costo de vivienda
 confirm("Bienvenido. A continuacion podra calcular el costo de su casa!" )
 
 function calcularCosto() {
@@ -13,7 +58,6 @@ let manoObra = (prompt("Ingrese 'C' si la mano de obra sera contratada o 'A' si 
 
 }
 
-
 const sistemasConstructivos = [
     {id:1,nombre:"MCT",costo:950,descripcion:"Mamposteria de tradicional ceramica ladrillo o ticholo"},
 
@@ -26,6 +70,6 @@ const sistemasConstructivos = [
 
 
 
-console.table(sistemasConstructivos)
+console.table(sistemasConstructivos) */
 
 
