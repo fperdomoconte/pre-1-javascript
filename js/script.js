@@ -3,7 +3,7 @@
 let menu = prompt("BIENVENIDO! \nDesea calcular el costo de una casa? Ingrese SI / NO")
 
 //Verifica instancia de calculo
-while (menu !== "NO") {
+while (menu === "SI") {
     //Declara y define variable primer dato: metros cuadrados
     let metrosCuadrados = parseInt(prompt("Ingrese la cantidad de metros cuadrados. \nEjemplo: 100"))
 
@@ -35,22 +35,39 @@ while (menu !== "NO") {
     let precioSistema = 0
 
     //Define el valor de la variable precioSistema en base al sistema constructivo elegido por el ususuario
-    if ((sistemaConstructivo == 1)) {
+    if (sistemaConstructivo == 1) {
         precioSistema = 950
-    } else if ((sistemaConstructivo == 2)) {
+    } else if (sistemaConstructivo == 2) {
         precioSistema = 1800
-    } else if ((sistemaConstructivo == 3)) {
+    } else if (sistemaConstructivo == 3) {
         precioSistema = 1200
-    } else if ((sistemaConstructivo == 4)) {
+    } else if (sistemaConstructivo == 4) {
         precioSistema = 1400
     }
 
+    //Declara y define valor de base para la variable precioTrabajadores, que cambiara en funcion de la eleccion del usuario
+    let precioTrabajadores = 0
+
+    //Confirm que solicita al usuario confirme si contratara mano de obra externa
+    let manodeObra = confirm("Contratara mano de obra externa?")
+    if (manodeObra == true) {
+        /* const calcularMO = (precioSistema) => precioSistema * 0.30 */
+
+        const calcularMO = function () {
+            let porcentajeMO = 0.30
+            precioTrabajadores = precioSistema * porcentajeMO
+        }
+
+        calcularMO ()
+    }
+
     //Define la funcion con el calculo a realizar con los datos ingresados - calcula el costo de la vivienda en base a los m2 y sistema constructivo, le suma un costo fijo de mano de obra (a futuro sera un % de mano de obra contratada vs. autoconstruccion)
-    const calcularCosto = (metrosCuadrados, precioSistema, precioTrabajadores) => metrosCuadrados * (precioSistema + precioTrabajadores)
+    const calcularCosto = (metrosCuadradosIngresados, precioSistemaElegido, precioManodeObra) => metrosCuadradosIngresados * (precioSistemaElegido + precioManodeObra)
 
     //Informa al usuario el costo calculado, concatena texto con variables
-    alert("El precio de su casa sera de USD " + calcularCosto(metrosCuadrados, precioSistema, 460))
-    console.log("El precio de su casa sera de USD " + calcularCosto(metrosCuadrados, precioSistema, 460))
+    alert("El precio de su casa sera de USD " + calcularCosto(metrosCuadrados, precioSistema, precioTrabajadores))
+    
+    console.log("El precio estimado de su casa fue de USD " + calcularCosto(metrosCuadrados, precioSistema, precioTrabajadores) + ".\nDel costo total, USD " + calcularCosto(metrosCuadrados, precioSistema, 0) + " corresponden a materiales y USD "+ calcularCosto(metrosCuadrados, 0, precioTrabajadores) + " correponden a mano de obra.")    
 
     //Consulta al usuario si desea realizar otro calculo
     //Pendiente sanitizacion de datos de entrada
