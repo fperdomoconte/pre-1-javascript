@@ -58,17 +58,26 @@ while (menu === "SI") {
         precioTrabajadores = calcularManoDeObra(precioSistema);
     }
 
-    //Define la funcion con el calculo a realizar con los datos ingresados - calcula el costo de la vivienda en base a los m2 y sistema constructivo, le suma un costo fijo de mano de obra (a futuro sera un % de mano de obra contratada vs. autoconstruccion)
-    const calcularCosto = (metrosCuadrados, precioSistema, precioTrabajadores) => metrosCuadrados * (precioSistema + precioTrabajadores)
+    // Define la funcion con el calculo de precio de diseno
+    const calcularPrecioDiseno = (precioTrabajadores) => {
+        const porcentajeDiseno = 3; //300% del basico
+        return precioTrabajadores * porcentajeDiseno;
+    }
+
+    let precioDiseno = calcularPrecioDiseno(precioTrabajadores);
+
+    //Define la funcion con el calculo a realizar con los datos ingresados - calcula el costo de la vivienda en base a los m2 y sistema constructivo, le suma el costo de mano de obra y un costo de diseno (a futuro sera un % de mano de obra contratada vs. autoconstruccion)
+    const calcularCosto = (metrosCuadrados, precioSistema, precioTrabajadores, precioDiseno) => metrosCuadrados * (precioSistema + precioTrabajadores) + precioDiseno;
+
 
     //Informa al usuario el costo calculado, concatena texto con variables
-    alert("El precio de su casa sera de USD " + calcularCosto(metrosCuadrados, precioSistema, precioTrabajadores))
+    alert("El precio de su casa sera de USD " + calcularCosto(metrosCuadrados, precioSistema, precioTrabajadores, precioDiseno));
 
-    console.log("El precio estimado de su casa fue de USD " + calcularCosto(metrosCuadrados, precioSistema, precioTrabajadores) + ".\nDel costo total, USD " + calcularCosto(metrosCuadrados, precioSistema, 0) + " corresponden a materiales y USD " + calcularCosto(metrosCuadrados, 0, precioTrabajadores) + " correponden a mano de obra.")
+    console.log("El precio estimado de su casa fue de USD " + calcularCosto(metrosCuadrados, precioSistema, precioTrabajadores, precioDiseno) + ".\nDel costo total, USD " + calcularCosto(metrosCuadrados, precioSistema, 0, 0) + " corresponden a materiales, USD " + calcularCosto(metrosCuadrados, 0, precioTrabajadores, 0) + " correponden a mano de obra, y USD " + precioDiseno + " corresponden a costos de diseno y permisos.");
 
     //Consulta al usuario si desea realizar otro calculo
     //Pendiente sanitizacion de datos de entrada
     menu = prompt("Desea hacer otra estimacion? Ingrese SI / NO")
 
-} //Informa que se esta cerando el simulador 
+} //Informa que se esta cerando el simulador SI
 alert("Cerrando simulador!")
